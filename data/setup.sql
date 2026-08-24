@@ -45,10 +45,12 @@ CREATE TABLE Authentication.tblRolePermission (
     dtmCreated DATETIME NOT NULL DEFAULT NOW(),
     dtmUpdated DATETIME ON UPDATE NOW(),
     PRIMARY KEY (intRoleId, intPermissionId),
-    FOREIGN KEY FK_tblRolePermission_intRoleId (intRoleId)
-        REFERENCES Authentication.tblRole(intRoleId),
-    FOREIGN KEY FK_tblRolePermission_intPermissionId (intPermissionId)
-        REFERENCES Authentication.tblPermission(intPermissionId)
+    CONSTRAINT FK_tblRolePermission_intRoleId 
+        FOREIGN KEY (intRoleId)
+            REFERENCES Authentication.tblRole(intRoleId),
+    CONSTRAINT FK_tblRolePermission_intPermissionId 
+        FOREIGN KEY (intPermissionId)
+            REFERENCES Authentication.tblPermission(intPermissionId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE Authentication.tblUserRole (
@@ -57,8 +59,12 @@ CREATE TABLE Authentication.tblUserRole (
     dtmCreated DATETIME NOT NULL DEFAULT NOW(),
     dtmUpdated DATETIME ON UPDATE NOW(),
     PRIMARY KEY (intUserId, intRoleId),
-    FOREIGN KEY FK_tblUserRole_intUserId (intUserId) REFERENCES Authentication.tblUser(intUserId),
-    FOREIGN KEY FK_tblUserRole_intRoleId (intRoleId) REFERENCES Authentication.tblRole(intRoleId)
+    CONSTRAINT FK_tblUserRole_intUserId 
+        FOREIGN KEY (intUserId) 
+            REFERENCES Authentication.tblUser(intUserId),
+    CONSTRAINT FK_tblUserRole_intRoleId 
+        FOREIGN KEY (intRoleId) 
+            REFERENCES Authentication.tblRole(intRoleId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE Authentication.tblEmailVerificationToken (
@@ -70,8 +76,9 @@ CREATE TABLE Authentication.tblEmailVerificationToken (
     dtmCreated DATETIME NOT NULL DEFAULT NOW(),
     dtmUpdated DATETIME ON UPDATE NOW(),
     PRIMARY KEY (intEmailVerificationTokenId),
-    FOREIGN KEY FK_tblVerificationToken_intUserId (intUserId)
-        REFERENCES Authentication.tblUser(intUserId),
+    CONSTRAINT FK_tblVerificationToken_intUserId 
+        FOREIGN KEY FK_tblVerificationToken_intUserId (intUserId)
+            REFERENCES Authentication.tblUser(intUserId),
     UNIQUE KEY UK_tblVerificationToken_strToken (strToken),
     INDEX I_tblVerificationToken_intUserId (intUserId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -84,8 +91,9 @@ CREATE TABLE Authentication.tblPasswordResetToken (
     dtmCreated DATETIME NOT NULL DEFAULT NOW(),
     dtmUpdated DATETIME ON UPDATE NOW(),
     PRIMARY KEY (intPasswordResetTokenId),
-    FOREIGN KEY FK_tblPasswordResetToken_intUserId (intUserId)
-        REFERENCES Authentication.tblUser(intUserId),
+    CONSTRAINT FK_tblPasswordResetToken_intUserId
+        FOREIGN KEY (intUserId)
+            REFERENCES Authentication.tblUser(intUserId),
     UNIQUE KEY UK_tblPasswordResetToken_strToken (strToken),
     INDEX I_tblPasswordResetToken_intUserId (intUserId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -130,8 +138,12 @@ CREATE TABLE Authentication.tblUserOauth (
     PRIMARY KEY (intUserOauthId),
     UNIQUE KEY UK_tblUserOauth_provider (intOauthProviderId, strOauthProviderId),
     INDEX I_tblUserOauth_intUserId (intUserId),
-    FOREIGN KEY FK_tblUserOauth_intUserId (intUserId) REFERENCES Authentication.tblUser(intUserId),
-    FOREIGN KEY FK_tblUserOauth_intOauthProviderId (intOauthProviderId) REFERENCES Core.ublOauthProvider(intOauthProviderId)
+    CONSTRAINT FK_tblUserOauth_intUserId 
+        FOREIGN KEY (intUserId) 
+            REFERENCES Authentication.tblUser(intUserId),
+    CONSTRAINT FK_tblUserOauth_intOauthProviderId
+        FOREIGN KEY (intOauthProviderId)
+            REFERENCES Core.ublOauthProvider(intOauthProviderId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO Authentication.tblRole
