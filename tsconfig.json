@@ -12,7 +12,7 @@
     "types": ["vite/client"]
   },
   "include": [
-    "assets/scripts/**",
+    "assets/scripts/**/*",
     "vite.config.ts",
     "eslint.config.mts"
   ]
