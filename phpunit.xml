@@ -11,7 +11,7 @@
          failOnRisky="true">
     <testsuites>
         <testsuite name="Unit Tests">
-            <directory>tests/PHP</directory>
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
 
@@ -32,6 +32,9 @@
             <directory>src/Authentication/Entity</directory>
             <directory>src/Authentication/Form</directory>
             <directory>src/Authentication/Repository</directory>
+
+            <directory>src/Core/Controller</directory>
+            <directory>src/Core/Entity</directory>
         </exclude>
     </source>
 </phpunit>
