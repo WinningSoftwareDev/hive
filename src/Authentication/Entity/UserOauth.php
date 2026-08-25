@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Authentication\Entity;
 
 use App\Authentication\Repository\UserOauthRepository;
-use App\Core\Entity\AbstractBaseEntity;
+use App\Core\Entity\Application\AbstractBaseEntity;
 use App\Core\Entity\OauthProvider;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -13,20 +13,21 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'tblUserOauth', schema: 'Authentication')]
 class UserOauth extends AbstractBaseEntity
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(name: 'intUserOauthId', type: 'integer', options: ['unsigned' => true])]
-    protected ?int $id = null;
-
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'oauthLinks')]
-    #[ORM\JoinColumn(name: 'intUserId', referencedColumnName: 'intUserId', nullable: false)]
+    #[ORM\JoinColumn(name: 'intUserId', referencedColumnName: 'intId', nullable: false)]
     private User $user;
 
     #[ORM\ManyToOne(targetEntity: OauthProvider::class)]
-    #[ORM\JoinColumn(name: 'intOauthProviderId', referencedColumnName: 'intOauthProviderId', nullable: false)]
+    #[ORM\JoinColumn(name: 'intOauthProviderId', referencedColumnName: 'intId', nullable: false)]
     private OauthProvider $provider;
 
-    #[ORM\Column(name: 'strOauthProviderId', type: 'string', length: 255, nullable: false, options: ['comment' => 'Provider user ID (e.g. GitHub user ID, Google sub)'])]
+    #[ORM\Column(
+        name: 'strOauthProviderId',
+        type: 'string',
+        length: 255,
+        nullable: false,
+        options: ['comment' => 'Provider user ID (e.g. GitHub user ID, Google sub)']
+    )]
     private string $oauthProviderId;
 
     public function __construct(User $user, OauthProvider $provider, string $oauthProviderId)
@@ -34,11 +35,6 @@ class UserOauth extends AbstractBaseEntity
         $this->user = $user;
         $this->provider = $provider;
         $this->oauthProviderId = $oauthProviderId;
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getUser(): User

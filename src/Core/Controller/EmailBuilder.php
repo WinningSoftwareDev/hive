@@ -6,8 +6,7 @@ namespace App\Core\Controller;
 
 use App\Core\Entity\EmailType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Mime\Address;
-use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime;
 
 class EmailBuilder extends AbstractApplicationController
 {
@@ -20,11 +19,11 @@ class EmailBuilder extends AbstractApplicationController
      *
      * @throws \Exception
      */
-    public function getEmail(string $emailTypeHandle, string $to, array $templateOptions = []): Email
+    public function getEmail(string $emailTypeHandle, string $to, array $templateOptions = []): Mime\Email
     {
         $emailType = $this->entityManager->getRepository(EmailType::class)->findOneBy(['handle' => $emailTypeHandle]);
 
-        if (!$emailType) {
+        if (!$emailType instanceof EmailType) {
             throw new \RuntimeException('Email type not found');
         }
 
@@ -32,7 +31,7 @@ class EmailBuilder extends AbstractApplicationController
         $mailFromName = $_ENV['MAIL_FROM_NAME'];
 
         if (!is_string($mailFromAddress) || !is_string($mailFromName)) {
-            throw new \RuntimeException('Mail from address or name is not set');
+            throw new \RuntimeException('Mail from address or name is not set in your .env file');
         }
 
         $emailContent = $this->renderTemplate($emailType->getTemplate(), $templateOptions)->getContent();
@@ -41,10 +40,10 @@ class EmailBuilder extends AbstractApplicationController
             throw new \RuntimeException('Email template is not valid');
         }
 
-        return (new Email())
-            ->from(new Address($mailFromAddress, $mailFromName))
+        return (new Mime\Email())
+            ->from(new Mime\Address($mailFromAddress, $mailFromName))
             ->to($to)
-            ->subject($emailType->getSubject())
+            ->subject($emailType->getName())
             ->html($emailContent);
     }
 }

@@ -25,11 +25,6 @@ export default defineConfig(({ mode }) => {
     return {
         base: './',
         publicDir: false,
-        resolve: {
-            alias: {
-                '@awesome.me/fa-pro': fileURLToPath(new URL('node_modules/@awesome.me/kit-fa638a4507/icons/js', import.meta.url))
-            }
-        },
         plugins: [vuePlugin({}), tailwindcss(), latteReloadPlugin],
         build: {
             outDir: './public/assets',

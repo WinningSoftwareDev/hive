@@ -6,7 +6,7 @@ namespace App\Authentication\Entity;
 
 use App\Authentication\Classes\DTO\RegistrationDTO;
 use App\Authentication\Repository\UserRepository;
-use App\Core\Entity\AbstractBaseEntity;
+use App\Core\Entity\Application\AbstractBaseEntity;
 use App\Core\Entity\OauthProvider;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -15,19 +15,28 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+/**
+ * @phpstan-type SerializedUser array{
+ *     id: ?int,
+ *     email: string,
+ *     createdAt: string,
+ *     verified: bool,
+ *     oauthProviders: string[],
+ * }
+ */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: 'tblUser', schema: 'Authentication')]
 class User extends AbstractBaseEntity implements UserInterface, PasswordAuthenticatedUserInterface, \JsonSerializable
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(name: 'intUserId', type: 'integer', options: ['unsigned' => true])]
-    protected ?int $id = null;
-
     #[ORM\Column(name: 'strEmail', length: 180, unique: true, nullable: false)]
     private string $email;
 
-    #[ORM\Column(name: 'strPassword', length: 255, nullable: true, options: ['comment' => 'Hashed password (null for OAuth-only users)'])]
+    #[ORM\Column(
+        name: 'strPassword',
+        length: 255,
+        nullable: true,
+        options: ['comment' => 'Hashed password (null for OAuth-only users)']
+    )]
     private ?string $password = null;
 
     #[ORM\Column(name: 'bolActive', type: 'boolean', nullable: false)]
@@ -41,8 +50,8 @@ class User extends AbstractBaseEntity implements UserInterface, PasswordAuthenti
      */
     #[ORM\ManyToMany(targetEntity: Role::class)]
     #[ORM\JoinTable(name: 'tblUserRole', schema: 'Authentication')]
-    #[ORM\JoinColumn(name: 'intUserId', referencedColumnName: 'intUserId')]
-    #[ORM\InverseJoinColumn(name: 'intRoleId', referencedColumnName: 'intRoleId')]
+    #[ORM\JoinColumn(name: 'intUserId', referencedColumnName: 'intId')]
+    #[ORM\InverseJoinColumn(name: 'intRoleId', referencedColumnName: 'intId')]
     private Collection $roles;
 
     /**
@@ -192,7 +201,7 @@ class User extends AbstractBaseEntity implements UserInterface, PasswordAuthenti
     }
 
     /**
-     * @return array<string, int|string|bool|list<string>|null>
+     * @return SerializedUser
      */
     public function jsonSerialize(): array
     {

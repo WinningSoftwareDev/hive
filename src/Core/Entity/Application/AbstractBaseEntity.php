@@ -2,24 +2,23 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Entity;
+namespace App\Core\Entity\Application;
 
-use Doctrine\ORM\Mapping\Column;
-use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
-use Doctrine\ORM\Mapping\MappedSuperclass;
-use Doctrine\ORM\Mapping\PrePersist;
-use Doctrine\ORM\Mapping\PreUpdate;
+use Doctrine\ORM\Mapping as ORM;
 
-#[MappedSuperclass]
-#[HasLifecycleCallbacks]
+#[ORM\MappedSuperclass]
+#[ORM\HasLifecycleCallbacks]
 abstract class AbstractBaseEntity
 {
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(name: 'intId', type: 'integer')]
     protected ?int $id = null;
 
-    #[Column(name: 'dtmCreated', type: 'datetime')]
+    #[ORM\Column(name: 'dtmCreated', type: 'datetime')]
     protected \DateTimeInterface $createdAt;
 
-    #[Column(name: 'dtmUpdated', type: 'datetime')]
+    #[ORM\Column(name: 'dtmUpdated', type: 'datetime')]
     protected ?\DateTimeInterface $updatedAt = null;
 
     public function getId(): ?int
@@ -47,13 +46,13 @@ abstract class AbstractBaseEntity
         $this->updatedAt = $updatedAt;
     }
 
-    #[PrePersist]
+    #[ORM\PrePersist]
     public function prePersist(): void
     {
         $this->createdAt = new \DateTime();
     }
 
-    #[PreUpdate]
+    #[ORM\PreUpdate]
     public function preUpdate(): void
     {
         $this->updatedAt = new \DateTime();

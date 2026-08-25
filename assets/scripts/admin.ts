@@ -1,6 +1,5 @@
 import '../styles/app.css';
 import { createApp } from 'vue';
-import '@awesome.me/fa-pro/all.js';
 import { createRouter, createWebHistory, Router } from 'vue-router';
 import AdminPanel from './Administration/AdminPanel.vue';
 import AdminDashboard from './Administration/Page/AdminDashboard.vue';

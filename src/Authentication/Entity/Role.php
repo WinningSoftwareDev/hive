@@ -4,42 +4,29 @@ declare(strict_types=1);
 
 namespace App\Authentication\Entity;
 
-use App\Authentication\Interface\SimpleEntityInterface;
-use App\Core\Entity\AbstractBaseEntity;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Core\Entity\Application\AbstractLookupEntity;
+use Doctrine\Common\Collections;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-#[ORM\Table(name: 'tblRole', schema: 'Authentication')]
-class Role extends AbstractBaseEntity implements SimpleEntityInterface
+#[ORM\Table(name: 'ublRole', schema: 'Authentication')]
+class Role extends AbstractLookupEntity
 {
     public const string ROLE_ADMIN = 'ROLE_ADMIN';
     public const string ROLE_USER = 'ROLE_USER';
 
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(name: 'intRoleId', type: 'integer', options: ['unsigned' => true])]
-    protected ?int $id = null;
-
-    #[ORM\Column(name: 'strRoleName', length: 50, unique: true, nullable: false)]
-    private string $name;
-
-    #[ORM\Column(name: 'strHandle', length: 50, unique: true, nullable: false)]
-    private string $handle;
-
     /**
-     * @var Collection<int, Permission>
+     * @var Collections\Collection<int, Permission>
      */
     #[ORM\ManyToMany(targetEntity: Permission::class)]
     #[ORM\JoinTable(name: 'tblRolePermission', schema: 'Authentication')]
-    #[ORM\JoinColumn(name: 'intRoleId', referencedColumnName: 'intRoleId')]
-    #[ORM\InverseJoinColumn(name: 'intPermissionId', referencedColumnName: 'intPermissionId')]
-    private Collection $permissions;
+    #[ORM\JoinColumn(name: 'intRoleId', referencedColumnName: 'intId')]
+    #[ORM\InverseJoinColumn(name: 'intPermissionId', referencedColumnName: 'intId')]
+    private Collections\Collection $permissions;
 
     public function __construct()
     {
-        $this->permissions = new ArrayCollection();
+        $this->permissions = new Collections\ArrayCollection();
     }
 
     public static function create(string $name, string $handle): self
@@ -51,20 +38,10 @@ class Role extends AbstractBaseEntity implements SimpleEntityInterface
         return $role;
     }
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function getHandle(): string
-    {
-        return $this->handle;
-    }
-
     /**
-     * @return Collection<int, Permission>
+     * @return Collections\Collection<int, Permission>
      */
-    public function getPermissions(): Collection
+    public function getPermissions(): Collections\Collection
     {
         return $this->permissions;
     }

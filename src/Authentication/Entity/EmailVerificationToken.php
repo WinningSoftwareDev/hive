@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Authentication\Entity;
 
 use App\Authentication\Repository\EmailVerificationTokenRepository;
-use App\Core\Entity\AbstractBaseEntity;
+use App\Core\Entity\Application\AbstractBaseEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Random\RandomException;
 
@@ -13,16 +13,11 @@ use Random\RandomException;
 #[ORM\Table(name: 'tblEmailVerificationToken', schema: 'Authentication')]
 class EmailVerificationToken extends AbstractBaseEntity
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(name: 'intEmailVerificationTokenId', type: 'integer', options: ['unsigned' => true])]
-    protected ?int $id = null;
-
     #[ORM\Column(name: 'strToken', type: 'string', length: 100, unique: true)]
     private string $token;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
-    #[ORM\JoinColumn(name: 'intUserId', referencedColumnName: 'intUserId', nullable: false)]
+    #[ORM\JoinColumn(name: 'intUserId', referencedColumnName: 'intId', nullable: false)]
     private User $user;
 
     #[ORM\Column(name: 'dtmExpires', type: 'datetime')]
