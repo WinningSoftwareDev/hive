@@ -1,45 +1,45 @@
 name: Release
 
 on:
-    workflow_dispatch:
+  workflow_dispatch:
 
 permissions:
-    contents: write
+  contents: write
 
 jobs:
-    release:
-        name: Tag and Release
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v5
+  release:
+    name: Tag and Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
 
-            - name: Extract version from CHANGELOG
-              id: version
-              run: |
-                  VERSION=$(grep -oP '^## \[\K[^\]]+' CHANGELOG.md | head -1)
-                  echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-                  echo "tag=$VERSION" >> "$GITHUB_OUTPUT"
+      - name: Extract version from CHANGELOG
+        id: version
+        run: |
+          VERSION=$(grep -oP '^## \[\K[^\]]+' CHANGELOG.md | head -1)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=$VERSION" >> "$GITHUB_OUTPUT"
 
-            - name: Check if tag exists
-              id: tag_check
-              run: |
-                  if git rev-parse "${{ steps.version.outputs.tag }}" >/dev/null 2>&1; then
-                      echo "exists=true" >> "$GITHUB_OUTPUT"
-                  else
-                      echo "exists=false" >> "$GITHUB_OUTPUT"
-                  fi
+      - name: Check if tag exists
+        id: tag_check
+        run: |
+          if git rev-parse "${{ steps.version.outputs.tag }}" >/dev/null 2>&1; then
+              echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+              echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
 
-            - name: Create tag
-              if: steps.tag_check.outputs.exists == 'false'
-              run: |
-                  git tag "${{ steps.version.outputs.tag }}"
-                  git push origin "${{ steps.version.outputs.tag }}"
+      - name: Create tag
+        if: steps.tag_check.outputs.exists == 'false'
+        run: |
+          git tag "${{ steps.version.outputs.tag }}"
+          git push origin "${{ steps.version.outputs.tag }}"
 
-            - name: Create release
-              if: steps.tag_check.outputs.exists == 'false'
-              env:
-                  GH_TOKEN: ${{ github.token }}
-              run: |
-                  gh release create "${{ steps.version.outputs.tag }}" \
-                      --title "${{ steps.version.outputs.tag }}" \
-                      --generate-notes
+      - name: Create release
+        if: steps.tag_check.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ steps.version.outputs.tag }}" \
+              --title "${{ steps.version.outputs.tag }}" \
+              --generate-notes
