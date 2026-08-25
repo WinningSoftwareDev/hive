@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Authentication\Controller;
 
-use App\Authentication\Classes\DTO\PasswordResetDTO;
-use App\Authentication\Classes\DTO\RequestPasswordResetDTO;
-use App\Authentication\Classes\Email\PasswordResetService;
+use App\Authentication\DTO\PasswordResetDTO;
+use App\Authentication\DTO\RequestPasswordResetDTO;
 use App\Authentication\Entity\PasswordResetToken;
 use App\Authentication\Entity\User;
 use App\Authentication\Form\LoginForm;
 use App\Authentication\Form\PasswordResetForm;
 use App\Authentication\Form\RegistrationForm;
 use App\Authentication\Form\RequestPasswordResetLinkForm;
+use App\Authentication\Service\Email\PasswordResetService;
 use App\Core\Controller\AbstractApplicationController;
 use App\Core\Entity\OauthProvider;
 use Doctrine\ORM\EntityManagerInterface;

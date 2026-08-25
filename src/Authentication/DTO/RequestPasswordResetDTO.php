@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Authentication\Classes\DTO;
+namespace App\Authentication\DTO;
 
 class RequestPasswordResetDTO
 {

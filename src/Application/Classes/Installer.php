@@ -51,7 +51,6 @@ final readonly class Installer
         $this->updateComposerJson($projectName, $packageName);
         $this->updatePackageJsonKitId($faKitId);
         $this->setupViteConfig($projectName, $faKitId);
-        $this->setupNpmrc(is_string($faToken) ? $faToken : null);
         $this->showSuccessMessage($projectName, $packageName);
         $this->installMonitorAssets();
         $this->cleanupSetupFiles();
@@ -161,36 +160,6 @@ final readonly class Installer
 
         $content = str_replace('fa638a4507', $faKitId, $content);
         file_put_contents($packageFile, $content);
-    }
-
-    private function setupNpmrc(?string $faToken): void
-    {
-        $templateFile = sprintf('%s/.npmrc.template', dirname(__FILE__, 4));
-        $npmrcFile = sprintf('%s/.npmrc', dirname(__FILE__, 4));
-
-        if (!file_exists($templateFile)) {
-            throw new \RuntimeException('Error: .npmrc.template file not found!');
-        }
-
-        if (!copy($templateFile, $npmrcFile)) {
-            throw new \RuntimeException('Error: Failed to copy .npmrc.template to .npmrc!');
-        }
-
-        if (is_string($faToken) && $faToken !== '') {
-            $npmrcContent = file_get_contents($npmrcFile);
-
-            if (is_string($npmrcContent)) {
-                $npmrcContent = str_replace(
-                    '//npm.fontawesome.com/:_authToken=',
-                    '//npm.fontawesome.com/:_authToken=' . $faToken,
-                    $npmrcContent,
-                );
-
-                file_put_contents($npmrcFile, $npmrcContent);
-            }
-        }
-
-        unlink($templateFile);
     }
 
     private function showSuccessMessage(string $projectName, string $packageName): void

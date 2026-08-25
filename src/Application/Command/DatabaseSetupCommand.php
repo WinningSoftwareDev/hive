@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Command;
 
-use App\Authentication\Classes\DTO\RegistrationDTO;
+use App\Authentication\DTO\RegistrationDTO;
 use App\Authentication\Entity\Role;
 use App\Authentication\Entity\User;
 use Doctrine\DBAL\Connection;

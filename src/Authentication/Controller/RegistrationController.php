@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Authentication\Controller;
 
-use App\Authentication\Classes\DTO\RegistrationDTO;
-use App\Authentication\Classes\Email\EmailVerificationService;
+use App\Authentication\DTO\RegistrationDTO;
 use App\Authentication\Entity\Role;
 use App\Authentication\Entity\User;
 use App\Authentication\Form\RegistrationForm;
+use App\Authentication\Service\Email\EmailVerificationService;
 use App\Core\Controller\AbstractApplicationController;
 use Doctrine\ORM\EntityManagerInterface;
 use Random\RandomException;

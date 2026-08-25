@@ -24,13 +24,12 @@ class UserController extends AbstractApplicationController
     {
         $page = $request->query->getInt('page', 1);
         $limit = $request->query->getInt('limit', 10);
-        $search = $request->query->get('search');
 
         /**
          * @var UserRepository $userRepository
          */
         $userRepository = $this->entityManager->getRepository(User::class);
-        $paginator = $userRepository->getPaginatedUsers($page, $limit, $search);
+        $paginator = $userRepository->getPaginatedUsers($page, $limit, $request->query->get('search'));
 
         $users = [];
 

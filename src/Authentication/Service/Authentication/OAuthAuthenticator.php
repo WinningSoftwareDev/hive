@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Authentication\Classes\Authentication;
+namespace App\Authentication\Service\Authentication;
 
 use App\Authentication\Entity\User;
 use App\Authentication\Entity\UserOauth;

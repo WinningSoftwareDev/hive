@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Authentication\Classes\Authentication;
+namespace App\Authentication\Service\Authentication;
 
-use App\Authentication\Classes\DTO\LoginDTO;
+use App\Authentication\DTO\LoginDTO;
 use App\Authentication\Entity\User;
 use App\Authentication\Form\LoginForm;
 use Doctrine\ORM\EntityManagerInterface;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Authentication\Classes\Email;
+namespace App\Authentication\Service\Email;
 
 use App\Authentication\Entity\EmailVerificationToken;
 use App\Authentication\Entity\User;

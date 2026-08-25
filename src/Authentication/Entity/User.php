@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Authentication\Entity;
 
-use App\Authentication\Classes\DTO\RegistrationDTO;
+use App\Authentication\DTO\RegistrationDTO;
 use App\Authentication\Repository\UserRepository;
 use App\Core\Entity\Application\AbstractBaseEntity;
 use App\Core\Entity\OauthProvider;

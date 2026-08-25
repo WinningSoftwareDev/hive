@@ -12,4 +12,4 @@
 /vite.config.ts
 /config/reference.php
 /public/bundles
-/.npmrc
+/coverage

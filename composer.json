@@ -38,10 +38,17 @@
       "App\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "App\\Tests\\": "tests/"
+    }
+  },
   "scripts": {
     "stan": "php -d memory_limit=2G ./vendor/bin/phpstan analyse -c phpstan.neon",
     "cs": "./vendor/bin/php-cs-fixer fix --dry-run --diff --allow-risky=yes",
     "cache:clean": "./bin/console cache:clear --env=prod --no-debug && ./bin/console cache:warmup --env=prod",
+    "test": "php -d xdebug.mode=coverage ./vendor/bin/phpunit --testdox --colors=always --coverage-html coverage --coverage-clover coverage/coverage.xml --testdox-html coverage/testdox.html",
+    "ci-test": "php -d memory_limit=2G ./vendor/bin/phpunit --testdox --colors=always",
     "post-create-project-cmd": [
       "@php -r \"copy('.env.template', '.env');\"",
       "@php bin/console app:install",
@@ -52,6 +59,7 @@
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.89",
     "phpstan/phpstan": "^2.1",
-    "phpstan/phpstan-doctrine": "^2.0"
+    "phpstan/phpstan-doctrine": "^2.0",
+    "phpunit/phpunit": "^13.3"
   }
 }
