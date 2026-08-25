@@ -40,7 +40,7 @@ class EmailBuilder extends AbstractApplicationController
             throw new \RuntimeException('Email template is not valid');
         }
 
-        return (new Mime\Email())
+        return new Mime\Email()
             ->from(new Mime\Address($mailFromAddress, $mailFromName))
             ->to($to)
             ->subject($emailType->getName())

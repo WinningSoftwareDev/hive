@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Authentication\DTO;
+namespace App\Tests\Authentication\DTO;
 
 use App\Authentication\DTO\LoginDTO;
 use PHPUnit\Framework\TestCase;

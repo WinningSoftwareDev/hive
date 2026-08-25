@@ -8,7 +8,7 @@ $finder = PhpCsFixer\Finder::create()
     ->exclude('public/bundles')
     ->notPath('config/reference.php');
 
-return (new PhpCsFixer\Config())
+return new PhpCsFixer\Config()
     ->setRules([
         '@Symfony' => true,
         '@PSR12' => true,

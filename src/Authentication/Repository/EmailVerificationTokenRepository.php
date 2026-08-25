@@ -18,7 +18,7 @@ class EmailVerificationTokenRepository extends EntityRepository
      */
     public function findRecentByUser(User $user): ?EmailVerificationToken
     {
-        $limit = (new \DateTime())->modify('-5 minutes')->format('Y-m-d H:i:s');
+        $limit = new \DateTime()->modify('-5 minutes')->format('Y-m-d H:i:s');
         $token = $this->createQueryBuilder('vt')
             ->select()
             ->where('vt.user = :user')
@@ -27,7 +27,7 @@ class EmailVerificationTokenRepository extends EntityRepository
             ->andWhere('vt.expiresAt >= :currentDate')
             ->setParameter('user', $user)
             ->setParameter('created', $limit)
-            ->setParameter('currentDate', (new \DateTime())->format('Y-m-d H:i:s'))
+            ->setParameter('currentDate', new \DateTime()->format('Y-m-d H:i:s'))
             ->getQuery()
             ->getOneOrNullResult();
 

@@ -35,7 +35,7 @@ class EmailVerificationToken extends AbstractBaseEntity
 
         $self->user = $user;
         $self->token = bin2hex(random_bytes(32));
-        $self->expiresAt = (new \DateTime('+1 day'));
+        $self->expiresAt = new \DateTime('+1 day');
 
         return $self;
     }
