@@ -5,9 +5,9 @@ import ReturnToHomepage from './Component/ReturnToHomepage.vue';
 import UserAccountHeader from './User/UserAccountHeader.vue';
 
 export const components = {
-    AuthenticationPage,
-    PasswordReset,
-    RequestPasswordReset,
-    ReturnToHomepage,
-    UserAccountHeader,
-}
+  AuthenticationPage,
+  PasswordReset,
+  RequestPasswordReset,
+  ReturnToHomepage,
+  UserAccountHeader,
+};

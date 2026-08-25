@@ -1,0 +1,6 @@
+node_modules
+vendor
+coverage
+public/build
+*.php
+*.latte

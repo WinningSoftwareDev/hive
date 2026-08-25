@@ -9,6 +9,6 @@ import { components as AppCoreComponents } from './Plugin/AppCore/_components';
 import { components as AuthCoreComponents } from './Plugin/AuthCore/_components';
 
 export const components = {
-    ...AppCoreComponents,
-    ...AuthCoreComponents,
-}
+  ...AppCoreComponents,
+  ...AuthCoreComponents,
+};

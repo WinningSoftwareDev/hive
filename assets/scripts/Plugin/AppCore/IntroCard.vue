@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import IUser from '../AuthCore/Interface/IUser';
-import WelcomeBlock from './WelcomeBlock.vue';
-import LoggedInUserPanel from './LoggedInUserPanel.vue';
-import LoginLinks from './LoginLinks.vue';
+  import { onMounted, ref } from 'vue';
+  import IUser from '../AuthCore/Interface/IUser';
+  import WelcomeBlock from './WelcomeBlock.vue';
+  import LoggedInUserPanel from './LoggedInUserPanel.vue';
+  import LoginLinks from './LoginLinks.vue';
 
-interface IProps
-{
-  name: string;
-  csrfToken: string;
-  appVersion: string;
-}
+  interface IProps {
+    name: string;
+    csrfToken: string;
+    appVersion: string;
+  }
 
-const user = ref<IUser|null>(null);
-const isLoading = ref<boolean>(true);
+  const user = ref<IUser | null>(null);
+  const isLoading = ref<boolean>(true);
 
-withDefaults(defineProps<IProps>(), {});
+  withDefaults(defineProps<IProps>(), {});
 
-onMounted(() => {
-  fetch('/authenticate/current-user')
+  onMounted(() => {
+    fetch('/authenticate/current-user')
       .then((response: Response) => {
         return response.json();
-      }).then((json: IUser) => {
+      })
+      .then((json: IUser) => {
         isLoading.value = false;
 
         if (!json.email.length) {
@@ -30,7 +30,7 @@ onMounted(() => {
 
         user.value = json;
       });
-});
+  });
 </script>
 
 <template>

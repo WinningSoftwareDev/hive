@@ -7,12 +7,12 @@ import SettingsSettingsIndex from './Administration/Page/Settings/SettingsIndex.
 import UserUserIndex from './Administration/Page/User/UserIndex.vue';
 
 const routes = [
-    {path: '/admin', component: AdminDashboard, meta: {title: 'Dashboard'}},
-    {path: '/admin/users', component: UserUserIndex, meta: {title: 'Users'}},
-    {path: '/admin/settings', component: SettingsSettingsIndex, meta: {title: 'Settings'}},
+  { path: '/admin', component: AdminDashboard, meta: { title: 'Dashboard' } },
+  { path: '/admin/users', component: UserUserIndex, meta: { title: 'Users' } },
+  { path: '/admin/settings', component: SettingsSettingsIndex, meta: { title: 'Settings' } },
 ];
 
-const router: Router = createRouter({history: createWebHistory(), routes});
+const router: Router = createRouter({ history: createWebHistory(), routes });
 const app = createApp(AdminPanel);
 
 app.use(router);

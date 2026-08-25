@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
-import AdminHeader from './Theme/AdminHeader.vue';
-import IRouteMeta from '../Core/Interface/IRouteMeta';
-import SidePanel from './Theme/SidePanel.vue';
+  import { computed } from 'vue';
+  import { useRoute } from 'vue-router';
+  import AdminHeader from './Theme/AdminHeader.vue';
+  import IRouteMeta from '../Core/Interface/IRouteMeta';
+  import SidePanel from './Theme/SidePanel.vue';
 
-const currentRoute = useRoute();
-const pageTitle = computed(() => {
-  const meta = currentRoute.meta as unknown as IRouteMeta;
+  const currentRoute = useRoute();
+  const pageTitle = computed(() => {
+    const meta = currentRoute.meta as unknown as IRouteMeta;
 
-  return meta.title || 'Administration Panel';
-});
+    return meta.title || 'Administration Panel';
+  });
 </script>
 <template>
   <div class="flex h-screen overflow-hidden bg-page text-light-text">

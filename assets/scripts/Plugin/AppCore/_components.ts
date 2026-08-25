@@ -3,7 +3,7 @@ import ErrorPageImage from './Error/ErrorPageImage.vue';
 import IntroCard from './IntroCard.vue';
 
 export const components = {
-    ErrorPageButtons,
-    ErrorPageImage,
-    IntroCard,
-}
+  ErrorPageButtons,
+  ErrorPageImage,
+  IntroCard,
+};

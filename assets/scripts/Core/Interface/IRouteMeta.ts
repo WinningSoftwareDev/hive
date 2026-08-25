@@ -1,4 +1,3 @@
-export default interface IRouteMeta
-{
-    title: string;
+export default interface IRouteMeta {
+  title: string;
 }

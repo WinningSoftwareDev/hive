@@ -1,6 +1,8 @@
 {
   "scripts": {
     "lint": "eslint --ext .ts,.vue assets/",
+    "format": "prettier --write \"assets/**/*.{ts,vue,js,css,json}\"",
+    "format:check": "prettier --check \"assets/**/*.{ts,vue,js,css,json}\"",
     "vite:build": "vite build",
     "vite:dev": "vite"
   },
@@ -12,9 +14,12 @@
     "@vitejs/plugin-vue": "^6.0.5",
     "autoprefixer": "^10.4.27",
     "eslint": "^10.1.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-vue": "^10.8.0",
     "globals": "^17.4.0",
     "postcss": "^8.5.6",
+    "prettier": "^3.9.6",
     "sass": "^1.93.2",
     "tailwindcss": "^4.1.15",
     "typescript": "^5.9.3",

@@ -21,8 +21,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 #[AsCommand('app:database:setup')]
 class DatabaseSetupCommand extends Command
 {
-    protected static string $defaultName = 'app:database:setup';
-
     public function __construct(
         private readonly string $dbHost,
         private readonly string $dbPort,
