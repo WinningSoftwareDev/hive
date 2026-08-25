@@ -1,63 +1,83 @@
 name: CI
 
 on:
-    pull_request:
-    workflow_dispatch:
+  pull_request:
+  workflow_dispatch:
 
 jobs:
-    php:
-        name: 'PHP 8.4: Code Standards'
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v5
+  php-cs-fixer:
+    name: 'PHP: CS Fixer'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
 
-            - name: Setup PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: '8.4'
-                  tools: composer
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          tools: composer
 
-            - name: Cache Composer dependencies
-              uses: actions/cache@v5
-              with:
-                  path: vendor
-                  key: composer-${{ hashFiles('composer.lock') }}
-                  restore-keys: composer-
+      - name: Cache Composer dependencies
+        uses: actions/cache@v5
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-
 
-            - name: Install dependencies
-              run: composer install
+      - name: Install dependencies
+        run: composer install
 
-            - name: PHP-CS-Fixer
-              run: composer run-script cs
+      - name: PHP-CS-Fixer
+        run: composer run-script cs
 
-            - name: PHPStan
-              run: composer run-script stan
+  phpstan:
+    name: 'PHP: PHPStan'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
 
-    typescript:
-        name: 'TypeScript: Linting'
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v5
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          tools: composer
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v5
-              with:
-                  node-version: 24
+      - name: Cache Composer dependencies
+        uses: actions/cache@v5
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-
 
-            - name: Configure FontAwesome registry
-              run: |
-                  cp .npmrc.template .npmrc
-                  sed -i "s|_authToken=$|_authToken=${{ secrets.FONTAWESOME_AUTH_TOKEN }}|" .npmrc
+      - name: Install dependencies
+        run: composer install
 
-            - name: Cache npm dependencies
-              uses: actions/cache@v5
-              with:
-                  path: node_modules
-                  key: npm-${{ hashFiles('package-lock.json') }}
-                  restore-keys: npm-
+      - name: PHPStan
+        run: composer run-script stan
 
-            - name: Install dependencies
-              run: npm install
+  typescript:
+    name: 'TypeScript: ESLint'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
 
-            - name: ESLint
-              run: npm run lint
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v5
+        with:
+          path: node_modules
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Prettier
+        run: npm run format:check
+
+      - name: ESLint
+        run: npm run lint
