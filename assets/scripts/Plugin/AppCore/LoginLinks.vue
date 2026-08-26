@@ -17,7 +17,7 @@
         href="/authenticate?form=LoginForm"
         :class="[
           'flex items-center justify-center gap-2 rounded-xl font-bold transition-all px-8 py-3',
-          'bg-primary hover:bg-accent text-dark-text hover:text-light-text transform hover:-translate-y-0.5 shadow-lg shadow-primary/20'
+          'bg-primary hover:bg-accent text-dark-text hover:text-light-text transform hover:-translate-y-0.5 shadow-lg shadow-primary/20',
         ]">
         <i class="fa-duotone fa-right-to-bracket"></i>
         Login to Account
@@ -27,7 +27,7 @@
         href="/authenticate?form=RegistrationForm"
         :class="[
           'flex items-center justify-center gap-2 rounded-xl font-bold transition-all px-8 py-3',
-          'bg-gray-800 hover:bg-gray-700 text-white border border-gray-600'
+          'bg-gray-800 hover:bg-gray-700 text-white border border-gray-600',
         ]">
         <i class="fa-duotone fa-user-plus text-gray-400"></i>
         Create Account
