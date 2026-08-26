@@ -1,11 +1,11 @@
-# AGENTS.md — Symfony Base Template
+# AGENTS.md — Hive
 
 ## Project Overview
 
 A highly opinionated, production-ready Symfony 8 project template. Use it to bootstrap new Symfony applications:
 
 ```bash
-composer create-project winningsoftware/symfony-base my-project
+composer create-project winningsoftware/hive my-project
 ```
 
 - **License**: GPL-3.0-or-later

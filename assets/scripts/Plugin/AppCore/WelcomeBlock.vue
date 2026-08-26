@@ -8,12 +8,12 @@
         class="text-transparent bg-clip-text bg-linear-to-r from-primary to-accent">ideas faster.</span>
     </h1>
     <p class="text-lg text-gray-400 leading-relaxed max-w-3xl">
-      This is your new <strong>Symfony Base</strong> project. Pre-configured authentication and a
+      This is your new <strong>Hive</strong> project. Pre-configured authentication and a
       modern UI stack; so you can focus on building features instead of boilerplate.
     </p>
     <div class="flex items-center gap-4 text-sm">
       <a
-        href="https://github.com/WinningSoftwareDev/symfony-base"
+        href="https://github.com/WinningSoftwareDev/hive"
         target="_blank"
         class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition font-semibold">
         <i class="fa-brands fa-github"></i>

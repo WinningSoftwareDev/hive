@@ -20,8 +20,8 @@ class SetupCommand extends Command
     {
         $this
             ->setName('app:setup')
-            ->setDescription('Sets up the Symfony Base project')
-            ->setHelp('This command helps you set up your Symfony Base project with custom project name and package information.');
+            ->setDescription('Sets up the Hive project')
+            ->setHelp('This command helps you set up your Hive project with custom project name and package information.');
     }
 
     /**
@@ -33,7 +33,7 @@ class SetupCommand extends Command
 
         $io->writeln('');
         $io->writeln('<fg=blue;options=bold>╔════════════════════════════════════════╗</>');
-        $io->writeln('<fg=blue;options=bold>║       Symfony Base Project Setup       ║</>');
+        $io->writeln('<fg=blue;options=bold>║           Hive Project Setup           ║</>');
         $io->writeln('<fg=blue;options=bold>╚════════════════════════════════════════╝</>');
         $io->writeln('');
 

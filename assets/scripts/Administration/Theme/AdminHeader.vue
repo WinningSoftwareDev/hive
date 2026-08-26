@@ -6,7 +6,7 @@
 
 <template>
   <header
-    class="h-16 border-b border-gray-800 flex justify-between items-center px-8 bg-page/50 backdrop-blur-md sticky top-0">
+    class="h-16 shrink-0 border-b border-gray-800 flex justify-between items-center px-8 bg-page/50 backdrop-blur-md">
     <h2 class="font-semibold text-lg">{{ pageTitle }}</h2>
 
     <div class="flex items-center gap-4">

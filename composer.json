@@ -1,6 +1,6 @@
 {
-  "name": "winningsoftware/symfony-base",
-  "description": "A base Symfony 8.1 project template with Latte + Vue",
+  "name": "winningsoftware/hive",
+  "description": "Hive — a production-ready Symfony 8 project template with Latte + Vue",
   "type": "project",
   "license": "GPL-3.0-or-later",
   "require": {

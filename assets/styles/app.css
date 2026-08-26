@@ -1,8 +1,8 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-primary: var(--color-purple-400);
-  --color-accent: var(--color-purple-600);
+  --color-primary: var(--color-yellow-400);
+  --color-accent: var(--color-yellow-600);
 
   --color-page: var(--color-gray-900);
   --color-light-text: var(--color-gray-300);

@@ -1,4 +1,4 @@
-# Symfony Base Template
+# Hive
 
 <p>
 <img src="https://img.shields.io/badge/Version-3.1.1-blue" alt="Version 3.1.1">
@@ -26,10 +26,10 @@ a modern frontend stack.
 ## 🛠 Installation
 ### Create your project
 ```bash
-composer create-project winningsoftware/symfony-base my-project
+composer create-project winningsoftware/hive my-project
 ```
 
-This will download the Symfony Base project to a new "my-project" directory in your current working directory. 
+This will download the Hive project to a new "my-project" directory in your current working directory. 
 
 This also runs the installer as part of the post create project command which creates the required directories, copies 
 the relevant config files, cleans up unnecessary files and runs `composer install` - so you don't need to run this 
@@ -119,7 +119,7 @@ For a production-like environment, I recommend using **Docker**. A standard setu
 > reverse proxy container into the referenced locations in your PHP container.
 
 ### 3. Hot Module Replacement (HMR)
-HMR is configured for both Vue/SCSS assets and Latte templates.
+HMR is configured for both Vue/CSS assets and Latte templates.
 * **Local Dev:** The default `server` block in `vite.config.ts` works out of the box.
 * **Containerized Dev:** If running over plain HTTP in Docker, ensure `server.https` is `false` and `server.hmr.protocol` 
 is set to `ws`.
@@ -127,11 +127,13 @@ is set to `ws`.
 ### 4. Quality Control
 Run these commands before committing to maintain high standards:
 
-| Tool             | Command         | Description                      |
-|:-----------------|:----------------|:---------------------------------|
-| **PHPStan**      | `composer stan` | Static analysis (Level: Max)     |
-| **PHP-CS-Fixer** | `composer cs`   | Check coding standards (dry-run) |
-| **ESLint**       | `npm run lint`  | Lint Vue and TypeScript files    |
+| Tool             | Command          | Description                      |
+|:-----------------|:-----------------|:---------------------------------|
+| **PHPStan**      | `composer stan`  | Static analysis (Level: Max)     |
+| **PHP-CS-Fixer** | `composer cs`    | Check coding standards (dry-run) |
+| **PHPUnit**      | `composer test`  | Run unit tests                   |
+| **ESLint**       | `npm run lint`   | Lint Vue and TypeScript files    |
+| **Prettier**     | `npm run format` | Format asset files               |
 
 ## 📂 Project Structure
 This template uses a modular, domain-oriented structure. The `src/` directory handles PHP logic, while `assets/scripts/` 

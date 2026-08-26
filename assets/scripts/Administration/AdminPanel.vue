@@ -16,10 +16,10 @@
   <div class="flex h-screen overflow-hidden bg-page text-light-text">
     <SidePanel />
 
-    <main class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+    <main class="flex-1 flex flex-col min-w-0 overflow-hidden">
       <AdminHeader :pageTitle="pageTitle" />
 
-      <div class="p-8">
+      <div class="flex-1 overflow-y-auto p-8">
         <router-view />
       </div>
     </main>

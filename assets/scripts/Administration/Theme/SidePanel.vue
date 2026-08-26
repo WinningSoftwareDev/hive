@@ -4,6 +4,7 @@
 
   const applicationName = ref<string>('');
   const currentUser = ref<IUser>();
+  const logoUrl = `${import.meta.env.BASE_URL}favicon.png`;
 
   onMounted(() => {
     fetch('/api/admin/app-meta')
@@ -20,7 +21,8 @@
 <template>
   <aside class="w-64 bg-secondary-bg border-r border-gray-800 flex flex-col">
     <a class="p-6 flex items-center gap-3" href="/">
-      🚀 <span class="font-bold text-xl tracking-tight">{{ applicationName }}</span>
+      <img :src="logoUrl" :alt="`${applicationName} logo`" class="w-7 h-7 object-contain" />
+      <span class="font-bold text-xl tracking-tight">{{ applicationName }}</span>
     </a>
 
     <nav class="flex-1 px-4 space-y-1 mt-4">
