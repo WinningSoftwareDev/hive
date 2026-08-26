@@ -8,7 +8,6 @@
   interface IProps {
     name: string;
     csrfToken: string;
-    appVersion: string;
   }
 
   const user = ref<IUser | null>(null);
@@ -37,7 +36,7 @@
   <div class="w-full max-w-6xl mx-auto mt-12">
     <div class="space-y-6">
       <div class="bg-gray-800/40 p-8 rounded-2xl border border-gray-700 shadow-xl">
-        <WelcomeBlock :appVersion="appVersion" />
+        <WelcomeBlock />
 
         <div class="mt-8 pt-8 border-t border-gray-700/50">
           <LoggedInUserPanel :user="user" :csrfToken="csrfToken" />

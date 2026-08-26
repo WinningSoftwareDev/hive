@@ -13,10 +13,6 @@
             {/if}
 
             {block content}{/block}
-
-            {if !isset($isErrorPage)}
-                {include '../../Core/Components/Theme/footer.latte'}
-            {/if}
         </div>
 
         {if $_ENV['USE_HMR'] !== 'true'}
