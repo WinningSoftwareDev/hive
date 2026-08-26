@@ -187,7 +187,7 @@ class AuthenticationController extends AbstractApplicationController
     #[Route(path: '/connect/{service}', name: 'connect_oauth_start', methods: [Request::METHOD_GET])]
     public function connect(string $service, ClientRegistry $clientRegistry): Response
     {
-        if (!in_array($service, [OauthProvider::GITHUB, OauthProvider::GOOGLE], true)) {
+        if (!in_array(strtoupper($service), OauthProvider::PROVIDERS, true)) {
             throw $this->createNotFoundException();
         }
 

@@ -16,4 +16,7 @@
         {asset 'css/stylesheet.css'}
     {/if}
     <link rel="icon" type="image/x-icon" href="{$_ENV['DEFAULT_URI']}/favicon.png">
+    {if array_key_exists('FONT_AWESOME_KEY', $_ENV) && !empty($_ENV['FONT_AWESOME_KEY'])}
+        <script src="https://kit.fontawesome.com/{$_ENV['FONT_AWESOME_KEY']}.js" crossorigin="anonymous"></script>
+    {/if}
 </head>

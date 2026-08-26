@@ -24,9 +24,9 @@ use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPasspor
 class OAuthAuthenticator extends OAuth2Authenticator
 {
     public function __construct(
-        private EntityManagerInterface $entityManager,
-        private RouterInterface $router,
-        private ClientRegistry $clientRegistry,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly RouterInterface $router,
+        private readonly ClientRegistry $clientRegistry,
     ) {
     }
 
@@ -34,16 +34,16 @@ class OAuthAuthenticator extends OAuth2Authenticator
     {
         $route = $request->attributes->get('_route');
 
-        return $route === 'connect_' . OauthProvider::GITHUB . '_check'
-            || $route === 'connect_' . OauthProvider::GOOGLE . '_check';
+        return $route === $this->connectCheckRouteName(OauthProvider::GITHUB)
+            || $route === $this->connectCheckRouteName(OauthProvider::GOOGLE);
     }
 
     public function authenticate(Request $request): SelfValidatingPassport
     {
         $route = $request->attributes->get('_route');
         $service = match ($route) {
-            'connect_' . OauthProvider::GITHUB . '_check' => OauthProvider::GITHUB,
-            'connect_' . OauthProvider::GOOGLE . '_check' => OauthProvider::GOOGLE,
+            $this->connectCheckRouteName(OauthProvider::GITHUB) => strtolower(OauthProvider::GITHUB),
+            $this->connectCheckRouteName(OauthProvider::GOOGLE) => strtolower(OauthProvider::GOOGLE),
             default => throw new AuthenticationException('Unknown OAuth service.'),
         };
 
@@ -66,7 +66,11 @@ class OAuthAuthenticator extends OAuth2Authenticator
                 $email = isset($oauthUserData['email']) && is_string($oauthUserData['email']) ? $oauthUserData['email'] : null;
                 $oauthId = $oauthUser->getId();
 
-                if ($service === OauthProvider::GITHUB && is_string($email) && str_ends_with($email, '@users.noreply.github.com')) {
+                if (
+                    is_string($email)
+                    && strtoupper($service) === OauthProvider::GITHUB
+                    && str_ends_with($email, '@users.noreply.github.com')
+                ) {
                     $realEmail = $this->getGitHubEmail($accessToken);
 
                     if (is_string($realEmail)) {
@@ -112,6 +116,9 @@ class OAuthAuthenticator extends OAuth2Authenticator
         );
     }
 
+    /**
+     * @throws \JsonException
+     */
     private function getGitHubEmail(AccessToken $accessToken): ?string
     {
         $context = stream_context_create([
@@ -121,14 +128,13 @@ class OAuthAuthenticator extends OAuth2Authenticator
                 'timeout' => 5,
             ],
         ]);
-
         $response = @file_get_contents('https://api.github.com/user/emails', false, $context);
 
         if ($response === false) {
             return null;
         }
 
-        $emails = json_decode($response, true);
+        $emails = json_decode($response, true, 512, JSON_THROW_ON_ERROR);
 
         if (!is_array($emails)) {
             return null;
@@ -163,5 +169,10 @@ class OAuthAuthenticator extends OAuth2Authenticator
         }
 
         return new RedirectResponse($this->router->generate('authenticate'));
+    }
+
+    private function connectCheckRouteName(string $providerHandle): string
+    {
+        return 'connect_' . strtolower($providerHandle) . '_check';
     }
 }

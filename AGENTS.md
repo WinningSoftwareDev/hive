@@ -33,7 +33,7 @@ assets/
 │   ├── Plugin/AppCore/           # Homepage Vue components
 │   ├── Plugin/AuthCore/          # Auth UI forms & pages
 │   └── Administration/           # Admin SPA pages & components
-└── styles/app.scss               # Tailwind config + CSS variables
+└── styles/app.css                # Tailwind config + CSS variables
 
 templates/            # Latte templates
 ├── Core/             # Layouts, headers, footers, error pages, emails
@@ -66,7 +66,7 @@ entity properties, only SQL columns use Hungarian notation.
 ### Frontend
 - **Vue in Latte**: Components are auto-mounted via `ComponentLoader.watch()`. Register new components in `Plugin/*/_components.ts` and use custom element tags in Latte: `<ComponentName prop-name="value" />`.
 - **Admin SPA**: Separate entry (`admin.ts`) — a full Vue Router app mounted at `#admin-root`.
-- **Styling**: TailwindCSS v4 via `@use 'tailwindcss'`. Scoped Vue styles use `@reference 'tailwindcss/theme'` to access theme tokens.
+- **Styling**: TailwindCSS v4 via `@use 'tailwindcss'`.
 
 ---
 

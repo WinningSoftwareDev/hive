@@ -101,6 +101,7 @@ CREATE TABLE Core.ublEmailType (
     strName VARCHAR(255) NOT NULL,
     strHandle VARCHAR(100) NOT NULL,
     strTemplate VARCHAR(255) NOT NULL,
+    bolActive TINYINT UNSIGNED NOT NULL DEFAULT 1,
     dtmCreated DATETIME NOT NULL DEFAULT NOW(),
     dtmUpdated DATETIME ON UPDATE NOW(),
     PRIMARY KEY (intId),
@@ -118,6 +119,7 @@ CREATE TABLE Core.ublOauthProvider (
     strName VARCHAR(100) NOT NULL,
     strHandle VARCHAR(32) NOT NULL,
     strIcon VARCHAR(100) DEFAULT NULL,
+    bolActive TINYINT UNSIGNED NOT NULL DEFAULT 1,
     dtmCreated DATETIME NOT NULL DEFAULT NOW(),
     dtmUpdated DATETIME ON UPDATE NOW(),
     PRIMARY KEY (intId),
@@ -127,8 +129,8 @@ CREATE TABLE Core.ublOauthProvider (
 INSERT INTO Core.ublOauthProvider
     (strName, strHandle, strIcon)
 VALUES
-    ('github', 'GitHub', 'fa-brands fa-github'),
-    ('google', 'Google', 'fa-brands fa-google');
+    ('GitHub', 'GITHUB', 'fa-brands fa-github'),
+    ('Google', 'GOOGLE', 'fa-brands fa-google');
 
 CREATE TABLE Authentication.tblUserOauth (
     intId INT UNSIGNED NOT NULL AUTO_INCREMENT,
