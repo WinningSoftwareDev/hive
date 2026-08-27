@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to 
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0] - 2026-08-27
+### Added
+- Added PHPUnit tests and partial coverage of existing service classes
+- Added Prettier for JS formatting
+
+### Changed
+- Updated `ci.yml` to separate steps into separate processes and add unit testing/format check to the pipeline
+- Rebranded the project from "Symfony Base" to "Hive"
+- Reworked default DB schema
+- All tables have a consistent `intId` primary key.
+- All tables (join tables excluded) now have `dtmCreated`, `dtmUpdated` columns
+- Consistent `ubl` schemas, all now extend `AbstractLookupEntity`
+
+### Fixed
+- Fixed styling issue in admin panel causing the header to be compressed when the page content is taller than the 
+viewport height
+
+### Removed
+- Removed some unnecessary Vue components 
+
 ## [3.1.1] - 2026-06-06
 ### Fixed
 - Added FontAwesome import to `admin.ts`
