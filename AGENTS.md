@@ -10,7 +10,7 @@ composer create-project winningsoftware/hive my-project
 
 - **License**: GPL-3.0-or-later
 - **PHP**: >=8.4
-- **Backend**: Symfony 8.0, Doctrine ORM 3.x, Latte templating
+- **Backend**: Symfony 8.1, Doctrine ORM 3.x, Latte templating
 - **Frontend**: Vue 3, Vite 8, TailwindCSS v4, TypeScript, SCSS
 
 ---
