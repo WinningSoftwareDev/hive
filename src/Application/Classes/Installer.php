@@ -34,23 +34,8 @@ final readonly class Installer
             throw new \InvalidArgumentException('Project name or package name was not in the expected format.');
         }
 
-        $faToken = $this->io->askHidden(
-            '<fg=yellow>Enter your FontAwesome npm auth token (leave blank to set later):</>',
-        );
-
-        $faKitId = $this->io->ask(
-            '<fg=yellow>Enter your FontAwesome Kit ID:</>',
-            'fa638a4507',
-        );
-
-        if (!is_string($faKitId) || $faKitId === '') {
-            $faKitId = 'fa638a4507';
-        }
-
         $this->updateEnvFile($projectName);
         $this->updateComposerJson($projectName, $packageName);
-        $this->updatePackageJsonKitId($faKitId);
-        $this->setupViteConfig($projectName, $faKitId);
         $this->showSuccessMessage($projectName, $packageName);
         $this->installMonitorAssets();
         $this->cleanupSetupFiles();
@@ -144,24 +129,6 @@ final readonly class Installer
         file_put_contents($composerFile, json_encode($composerData, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n");
     }
 
-    private function updatePackageJsonKitId(string $faKitId): void
-    {
-        $packageFile = sprintf('%s/package.json', dirname(__FILE__, 4));
-
-        if (!file_exists($packageFile)) {
-            throw new \RuntimeException('Error: package.json file not found!');
-        }
-
-        $content = file_get_contents($packageFile);
-
-        if (!is_string($content)) {
-            throw new \RuntimeException('Error: package.json content was not readable!');
-        }
-
-        $content = str_replace('fa638a4507', $faKitId, $content);
-        file_put_contents($packageFile, $content);
-    }
-
     private function showSuccessMessage(string $projectName, string $packageName): void
     {
         $projectNameSlug = strtolower(str_replace(' ', '-', $projectName));
@@ -173,8 +140,6 @@ final readonly class Installer
         $this->io->writeln("<fg=green>✓ Composer package set to: {$packageName}</>");
         $this->io->writeln('<fg=green>✓ Version set to: 1.0.0</>');
         $this->io->writeln("<fg=green>✓ Admin user email set to: {$adminEmail}</>");
-        $this->io->writeln('<fg=green>✓ FontAwesome auth token configured in .npmrc</>');
-        $this->io->writeln('<fg=green>✓ FontAwesome kit ID set in package.json and vite config</>');
         $this->io->writeln('');
         $this->io->writeln('<fg=gray>Happy coding! 🚀</>');
         $this->io->writeln('');
@@ -212,7 +177,7 @@ final readonly class Installer
     /**
      * @throws \RuntimeException
      */
-    private function setupViteConfig(string $projectName, ?string $faKitId = null): void
+    private function setupViteConfig(string $projectName): void
     {
         $templateFile = sprintf('%s/vite.config.template.ts', dirname(__FILE__, 4));
         $configFile = sprintf('%s/vite.config.ts', dirname(__FILE__, 4));
@@ -232,10 +197,6 @@ final readonly class Installer
         }
 
         $configContent = str_replace('{APP_NAME}', strtolower(str_replace(' ', '-', $projectName)), $configContent);
-
-        if (is_string($faKitId) && $faKitId !== '') {
-            $configContent = str_replace('fa638a4507', $faKitId, $configContent);
-        }
 
         file_put_contents($configFile, $configContent);
 
