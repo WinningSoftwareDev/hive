@@ -23,6 +23,7 @@
         <exclude>
             <file>src/Kernel.php</file>
             <file>src/Application/Classes/Installer.php</file>
+            <file>src/Application/Command/SetupCommand.php</file>
 
             <directory>src/Administration/Controller</directory>
 
