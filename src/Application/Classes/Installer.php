@@ -174,44 +174,6 @@ final readonly class Installer
         }
     }
 
-    /**
-     * @throws \RuntimeException
-     */
-    private function setupViteConfig(string $projectName): void
-    {
-        $templateFile = sprintf('%s/vite.config.template.ts', dirname(__FILE__, 4));
-        $configFile = sprintf('%s/vite.config.ts', dirname(__FILE__, 4));
-
-        if (!file_exists($templateFile)) {
-            throw new \RuntimeException('Error: vite.config.template.ts file not found!');
-        }
-
-        if (!copy($templateFile, $configFile)) {
-            throw new \RuntimeException('Error: Failed to copy vite.config.template.ts to vite.config.ts!');
-        }
-
-        $configContent = file_get_contents($configFile);
-
-        if (!is_string($configContent)) {
-            throw new \RuntimeException('Error: vite.config.ts content was not readable!');
-        }
-
-        $configContent = str_replace('{APP_NAME}', strtolower(str_replace(' ', '-', $projectName)), $configContent);
-
-        file_put_contents($configFile, $configContent);
-
-        $gitignoreFilePath = sprintf('%s/.gitignore', dirname(__FILE__, 4));
-
-        if (file_exists($gitignoreFilePath)) {
-            $gitignoreContent = file_get_contents($gitignoreFilePath);
-
-            if (is_string($gitignoreContent)) {
-                $gitignoreContent = str_replace('/vite.config.ts', '', $gitignoreContent);
-                file_put_contents($gitignoreFilePath, $gitignoreContent);
-            }
-        }
-    }
-
     private function installMonitorAssets(): void
     {
         exec('php bin/console assets:install --symlink --relative');
