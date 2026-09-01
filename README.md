@@ -20,8 +20,8 @@ a modern frontend stack.
 
 ![index.png](screenshots/index.png)
 ![authentication.png](screenshots/authentication.png)
-![user-overview.png](screenshots/user-overview.png)
 ![error-page.png](screenshots/error-page.png)
+![health-checks.png](screenshots/health-checks.png)
 
 ## 🛠 Installation
 ### Create your project
@@ -29,7 +29,7 @@ a modern frontend stack.
 composer create-project winningsoftware/hive my-project
 ```
 
-This will download the Hive project to a new "my-project" directory in your current working directory. 
+This will download the Hive project to a new `my-project` directory inside your current working directory. 
 
 This also runs the installer as part of the post create project command which creates the required directories, copies 
 the relevant config files, cleans up unnecessary files and runs `composer install` - so you don't need to run this 

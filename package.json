@@ -1,5 +1,6 @@
 {
   "name": "hive",
+  "type": "module",
   "scripts": {
     "lint": "eslint --ext .ts,.vue assets/",
     "format": "prettier --write \"assets/**/*.{ts,vue,js,css,json}\"",

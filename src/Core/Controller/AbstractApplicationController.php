@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Core\Controller;
 
 use App\Authentication\Entity\User;
-use CloudBase\LatteHelper\Controller\AbstractLatteController;
+use LatteHelper\Controller\AbstractLatteController;
 
 class AbstractApplicationController extends AbstractLatteController
 {

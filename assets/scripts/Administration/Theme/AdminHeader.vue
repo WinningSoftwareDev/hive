@@ -10,9 +10,6 @@
     <h2 class="font-semibold text-lg">{{ pageTitle }}</h2>
 
     <div class="flex items-center gap-4">
-      <button class="text-gray-400 hover:text-white transition-colors">
-        <i class="fas fa-bell"></i>
-      </button>
       <a
         href="/authenticate/logout"
         class="text-xs bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded transition-colors"

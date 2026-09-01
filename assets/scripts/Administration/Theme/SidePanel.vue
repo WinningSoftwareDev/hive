@@ -1,10 +1,10 @@
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
   import { IUser } from '../../Plugin/AuthCore/interface';
+  import logoImg from '../../../images/logo.png';
 
   const applicationName = ref<string>('');
   const currentUser = ref<IUser>();
-  const logoUrl = `${import.meta.env.BASE_URL}favicon.png`;
 
   onMounted(() => {
     fetch('/api/admin/app-meta')
@@ -21,7 +21,7 @@
 <template>
   <aside class="w-64 bg-secondary-bg border-r border-gray-800 flex flex-col">
     <a class="p-6 flex items-center gap-3" href="/">
-      <img :src="logoUrl" :alt="`${applicationName} logo`" class="w-7 h-7 object-contain" />
+      <img :src="logoImg" :alt="`${applicationName} logo`" class="w-7 h-7 object-contain" />
       <span class="font-bold text-xl tracking-tight">{{ applicationName }}</span>
     </a>
 

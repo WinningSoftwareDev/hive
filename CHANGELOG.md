@@ -5,8 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to 
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.3] - 2026-09-01
+### Changed
+- Updated dependency from `cloudbase/latte-helper` to `winningsoftware/latte-helper` and updated all classes and files that referenced
+the old package namespace.
+
+### Fixed
+- Fixed an issue where the logo used in the admin panel did not resolve correctly in production builds.
+
 ## [4.0.2] - 2026-08-31
-### Changes
+### Changed
 - Increased test coverage for default built in classes - `Authentication/Service/Email` and `Authentication/Service/Helper` 
 are now 100% covered.
 

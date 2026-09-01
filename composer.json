@@ -6,7 +6,6 @@
   "require": {
     "php": ">=8.4.1",
     "cloudbase/asset-node": "^1.0",
-    "cloudbase/latte-helper": "^1.2.1",
     "doctrine/dbal": "^4.4",
     "doctrine/doctrine-bundle": "^3.3",
     "doctrine/orm": "^3.6",
@@ -25,7 +24,8 @@
     "symfony/security-bundle": "^8.1",
     "symfony/validator": "^8.1",
     "symfony/var-exporter": "^8.1",
-    "symfony/yaml": "^8.1"
+    "symfony/yaml": "^8.1",
+    "winningsoftware/latte-helper": "^2.0"
   },
   "config": {
     "allow-plugins": {

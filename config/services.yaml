@@ -1,7 +1,7 @@
 parameters:
 
 imports:
-  - { resource: '../vendor/cloudbase/latte-helper/config/services.yaml' }
+  - { resource: '../vendor/winningsoftware/latte-helper/config/services.yaml' }
 
 services:
   _defaults:
@@ -23,25 +23,25 @@ services:
     resource: '../src/Administration/Controller'
     tags: [ 'controller.service_arguments' ]
     calls:
-      - setLatteFactory: ['@CloudBase\LatteHelper\Classes\Latte\LatteEngineFactory']
+      - setLatteFactory: ['@LatteHelper\Classes\Latte\LatteEngineFactory']
 
   App\Application\Controller\:
     resource: '../src/Application/Controller'
     tags: [ 'controller.service_arguments' ]
     calls:
-      - setLatteFactory: ['@CloudBase\LatteHelper\Classes\Latte\LatteEngineFactory']
+      - setLatteFactory: ['@LatteHelper\Classes\Latte\LatteEngineFactory']
 
   App\Authentication\Controller\:
     resource: '../src/Authentication/Controller'
     tags: [ 'controller.service_arguments' ]
     calls:
-      - setLatteFactory: ['@CloudBase\LatteHelper\Classes\Latte\LatteEngineFactory']
+      - setLatteFactory: ['@LatteHelper\Classes\Latte\LatteEngineFactory']
 
   App\Core\Controller\:
     resource: '../src/Core/Controller'
     tags: [ 'controller.service_arguments' ]
     calls:
-      - setLatteFactory: [ '@CloudBase\LatteHelper\Classes\Latte\LatteEngineFactory' ]
+      - setLatteFactory: [ '@LatteHelper\Classes\Latte\LatteEngineFactory' ]
 
   App\Core\Classes\HealthCheck\DatabaseSetupCheck:
     tags:
